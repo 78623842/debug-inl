@@ -55,7 +55,7 @@ extern "C" {
 #endif /* !NDEBUG */
 
 #ifdef HAVE_PREFIX
-#define GETFILENAME(x)  (strrchr(x,'/')?strchr(x,'/')+1:x)
+#define GETFILENAME(x)  (strrchr(x,'/')?strrchr(x,'/')+1:x)
 #define SHOW_PREFIX clr_print(cRST,"%s:%d ",GETFILENAME(__FILE__),__LINE__)
 #else
 #define SHOW_PREFIX
