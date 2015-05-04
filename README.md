@@ -1,6 +1,7 @@
 # debug-inl
 debugging with color(in C)
-##test colors in your console 
+##test colors in your console
+```C
 \#include "debug-inl.h"
 void main(void)
 {
@@ -8,6 +9,7 @@ void main(void)
 }
 
 ##print debug infomation with color
+```C
 \#include "debug-inl.h"
 int main(int argc, char **argv)
 {
@@ -18,6 +20,7 @@ int main(int argc, char **argv)
 }
 
 ##config
+```C
 /* config start */
 
 \#define HAVE_COLOR  1       /*< use color or not */
