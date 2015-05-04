@@ -15,10 +15,16 @@ extern "C" {
 
 #define CSI         "\x1B["
 
-/* config here */
-#define HAVE_COLOR  1
-#define HAVE_PREFIX 1       /*< like FILENAME:LINE */
-#define _print      printf
+/* config start */
+
+#define HAVE_COLOR  1       /*< use color or not */
+#define HAVE_PREFIX 1       /*< default like FILENAME:LINE */
+
+/* if you want to redirect to a file without debug infomation,
+ * you can replace stdout to stderr */
+#define _print(x...)      fprintf(stdout, x)
+
+/* config end */
 
 #ifdef HAVE_COLOR
 #define COLOR(x)    CSI#x
@@ -56,7 +62,7 @@ extern "C" {
 
 #ifdef HAVE_PREFIX
 #define GETFILENAME(x)  (strrchr(x,'/')?strrchr(x,'/')+1:x)
-#define SHOW_PREFIX clr_print(cRST,"%s:%d ",GETFILENAME(__FILE__),__LINE__)
+#define SHOW_PREFIX clr_print(cRST,"%s:%-3d ",GETFILENAME(__FILE__),__LINE__)
 #else
 #define SHOW_PREFIX
 #endif
@@ -70,6 +76,7 @@ extern "C" {
 #define TEST_COLOR(x) printf(x#x"\n")
 void test_colors(void)
 {
+    clr_print(cGRA,"Test color in console...\n");
     TEST_COLOR(cBLK);
     TEST_COLOR(cRED);
     TEST_COLOR(cGRN);
@@ -88,10 +95,10 @@ void test_colors(void)
     TEST_COLOR(cBRI);
     TEST_COLOR(cRST);
 
-    dbg_print("debug\n");
-    inf_print("information\n");
-    war_print("warning\n");
-    err_print("error\n");
+    dbg_print("%d-%s\n", 1, "debug color");
+    inf_print("%d-%s\n", 2, "information color");
+    war_print("%d-%s\n", 3, "waring color");
+    err_print("%d-%s\n", 4, "error color");
 }
 //*/ end test
 
