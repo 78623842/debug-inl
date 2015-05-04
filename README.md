@@ -1,14 +1,14 @@
 # debug-inl
 debugging with color(in C)
 ##test colors in your console 
-#include "debug-inl.h"
+\#include "debug-inl.h"
 void main(void)
 {
     test_colors();
 }
 
 ##print debug infomation with color
-#include "debug-inl.h"
+\#include "debug-inl.h"
 int main(int argc, char **argv)
 {
     dbg_print("%d-%s\n", 1, "debug color");
@@ -20,12 +20,12 @@ int main(int argc, char **argv)
 ##config
 /* config start */
 
-#define HAVE_COLOR  1       /*< use color or not */
-#define HAVE_PREFIX 1       /*< default like FILENAME:LINE */
+\#define HAVE_COLOR  1       /*< use color or not */
+\#define HAVE_PREFIX 1       /*< default like FILENAME:LINE */
 
 /* if you want to redirect to a file without debug infomation,
  * you can replace stdout to stderr */
-#define _print(x...)      fprintf(stdout, x)
+\#define _print(x...)      fprintf(stdout, x)
 
 /* config end */
 
