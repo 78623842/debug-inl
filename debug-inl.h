@@ -22,7 +22,7 @@ extern "C" {
 
 /* if you want to redirect to a file without debug infomation,
  * you can replace stdout to stderr */
-#define _print(x...)      fprintf(stdout, x)
+#define _print(...)      fprintf(stdout,## __VA_ARGS__)
 
 /* config end */
 
@@ -52,10 +52,10 @@ extern "C" {
 #define cRST COLOR(0m)      /*< Reset */
 
 #ifdef NDEBUG
-#define clr_print(color, x...)
+#define clr_print(color, ...)
 #else
-#define clr_print(color, x...) do { \
-    _print(color x); \
+#define clr_print(color, ...) do { \
+    _print(color __VA_ARGS__); \
     _print(cRST); \
 }while(0)
 #endif /* !NDEBUG */
@@ -67,14 +67,14 @@ extern "C" {
 #define SHOW_PREFIX
 #endif
 
-#define dbg_print(x...) SHOW_PREFIX;clr_print(cGRN,x)
-#define inf_print(x...) SHOW_PREFIX;clr_print(cLCY,x)
-#define war_print(x...) SHOW_PREFIX;clr_print(cYEL,x)
-#define err_print(x...) SHOW_PREFIX;clr_print(cLRD,x)
+#define dbg_print(...) SHOW_PREFIX;clr_print(cGRN,## __VA_ARGS__)
+#define inf_print(...) SHOW_PREFIX;clr_print(cLCY,## __VA_ARGS__)
+#define war_print(...) SHOW_PREFIX;clr_print(cYEL,## __VA_ARGS__)
+#define err_print(...) SHOW_PREFIX;clr_print(cLRD,## __VA_ARGS__)
 
 //* simple test
 #define TEST_COLOR(x) printf(x#x"\n")
-void test_colors(void)
+static inline void test_colors(void)
 {
     clr_print(cGRA,"Test color in console...\n");
     TEST_COLOR(cBLK);
